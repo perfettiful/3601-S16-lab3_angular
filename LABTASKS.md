@@ -43,16 +43,26 @@ questions by editing this file.
 ##### Add a pet to the array, data (in the appropriate controller). See the change on the web page (you need to reload, but not restart).
 >added "lizard"
 
-##### How are new items added and deleted through the web page? (i.e. - What functions from the main controller are used in index.html, and what Angular directives allow them to interact with the view?)
+##### How are new items added and deleted through the web page?
+(i.e. - What functions from the main controller are used in index.html, and what Angular directives allow them to interact with the view?)
+> app.js is managing the controllers being run bu node and thus when a controller is modified, this will be done in real time if the server is running
 
+> The mainCtrl function is determining the default list of elements in the list with mainControl.data, adding filed with mainControl.addData()
+> removing with mainControl.removeData(), and item listing with itemsInList()
+
+> The Angular directive utilized are ng-app, ng-include, ng-submit, ng-model, ng-click and ng-repeat
 
 ##### Open navbar.html view. What is its purpose? How would you go about adding links to the navigation bar?
-##### Find two instances of use of bootstrap (see above) in either navbar view or index view or both; explain what is formatted. 
+> navbar.html seems to be the code for rendering the navbar for index.html but exported. We would modify navbar.pages
+> to hyperlink to a new /extension that we could make.
 
+##### Find two instances of use of bootstrap (see above) in either navbar view or index view or both; explain what is formatted.
+>1."btn btn-primary" styles the submission button for our list
+>2. "nav nav-pills" provides CSS formatting for navbar
 >Protip: Bootstrap is awesome. Start using it. Seriously. This allows you to do fancy things with styling (CSS) with very little effort. Think back to lab 1. http://getbootstrap.com/components/ <- Regular Bootstrap. https://angular-ui.github.io/bootstrap/ <- Angular Bootstrap. These offer separate functionality and both can be used simultaneously.
 
 ##### Stop the server by pressing Ctrl-C in the terminal, type "grunt test" to run tests. Where are the tests located?
-
+> The tests are located in two places, clientJavascript.spec.js and main.controller.spec.js with a total of 8 tests
 ## Part #2: modifying the project.
 
 - Set up Travis CI and add the build status icon to your project's README.
