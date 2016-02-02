@@ -13,15 +13,40 @@ questions by editing this file.
 - Observe the HTML element's formatting (it's done via bootstrap). As you are working on the questions below, experiment with the project to get a better sense for what each element is. 
 
 ##### List all the files at the top level of your project (i.e. not in public) and briefly state the purpose of each one, as you understand it. You might want to postpone describing some files until you work with the project a bit more. 
+>1. bower_comonents: angular, bootstrap, and jquery folders
+>2. coverage: holds tha PhantomJS testing and javascript controllers
+>3. node_modules: server side testing, karma and jasmine
+
 ##### List the folders in the public folder and describe the purpose for each.
+>1. assets: images for kittens webpage
+>2. css: just main css for webpage.
+>3. javascript: client side js and controllers.
+>4. views:different html pages for this site
+
 ##### What are the names of the Angular controllers in this web application? What does each of them do?
-##### Open the index.html view. What controller(s) is it using? 
+>1.main.controller.js: sets default fields for the list at the bottom of kittens page, as well as adding and removing list items, and the total items in list.
+>2. navbar.controller.js: manages navbar hyperlinks
+
+##### Open the index.html view. What controller(s) is it using?
+ index uses the navbar controller named mainCtrl and uses the main controller in the form ng-submit
+
 ##### Where is the navigation bar included in the source code for index.html? 
+>It's in a div tag under ng-include.
+
 ##### app.js within public/javascript is where your Angular modules are located at. What modules does the project currently have?
+>stdControllers
+>mainApp
+
 ##### Notice, the code controlling the Node.js server is in a file also called app.js. There is no particular reason for this other than a generator we will use later on follows the same convention. Explain the difference between the purpose of the files (think client vs server).
-##### Add a pet to the array, data (in the appropriate controller). See the change on the web page (you need to reload, but not restart). 
+>The app.js on the server side sends and recieves files and data to and from the host. The app.js on the client side manages angular controllers
+
+##### Add a pet to the array, data (in the appropriate controller). See the change on the web page (you need to reload, but not restart).
+>added "lizard"
+
 ##### How are new items added and deleted through the web page? (i.e. - What functions from the main controller are used in index.html, and what Angular directives allow them to interact with the view?)
-##### Open navbar.html view. What is its purpose? How would you go about adding links to the navigation bar? 
+
+
+##### Open navbar.html view. What is its purpose? How would you go about adding links to the navigation bar?
 ##### Find two instances of use of bootstrap (see above) in either navbar view or index view or both; explain what is formatted. 
 
 >Protip: Bootstrap is awesome. Start using it. Seriously. This allows you to do fancy things with styling (CSS) with very little effort. Think back to lab 1. http://getbootstrap.com/components/ <- Regular Bootstrap. https://angular-ui.github.io/bootstrap/ <- Angular Bootstrap. These offer separate functionality and both can be used simultaneously.
