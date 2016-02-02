@@ -1,4 +1,5 @@
 # CSCI 3601 Lab #3 - Angular
+[![Build Status](https://travis-ci.org/perfettiful/3601-S16-lab3_angular.svg?branch=master)](https://travis-ci.org/perfettiful/3601-S16-lab3_angular)
 In this lab you will learn to use AngularJS to simplify the addition of interactive elements such as forms, navbars, footers, and buttons to your projects. In addition, Angular makes it easier to reuse elements like navbars and footers across multiple pages in a website.
 
 You will continue to use continuous integration and Test Driven Development (TDD). To this end, you will now set up Travis entirely yourselves (don't worry, it's like 3 extra steps from the last lab). Also, you will use a new tool, known as Grunt, to autmoate tasks in your project, such as running your Karma/Jasmine tests.
