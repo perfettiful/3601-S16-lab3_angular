@@ -32,13 +32,13 @@
             <li class="list-group-item">
 
                 <form ng-submit="mainControl.addData()">
-                    <input ng-model="mainControl.textField" type="text" size="50" placeholder="add a new item to the list!">
-                    <input type="submit" value="submit" class="btn btn-primary">
-                    <span class="floatRight">Items in this list: {{mainControl.itemsInList()}}</span>
+                    <input ng-model="mainControl.textField" type="text" size="100" placeholder="Add a new item to the list!!!!!">
+                    <input type="submit" value="submit" class="btn btn-success">
+                    <span class="badge floatRight">Total Items: {{mainControl.itemsInList()}}</span>
                 </form>
 
             </li>
-            <li class="list-group-item" ng-repeat="test in mainControl.data">{{test.text}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="mainControl.removeData($index)"></span></li>
+            <li class="list-group-item" ng-repeat="test in mainControl.data">{{test.text}}<span class="glyphicon glyphicon-remove-sign floatRight" style="color: red" ng-click="mainControl.removeData($index)"></span></li>
         </ul>
     </div>
 </body>

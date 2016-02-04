@@ -33,7 +33,7 @@ app.use(express.static('bower_components'));
 
 
 app.get('/kittens', function(req, res){
-    res.send("Page under construction!");
+    res.sendFile('public/views/kittens.html', options);
 });
 
 app.get('/about', function(req, res){
