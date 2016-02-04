@@ -63,23 +63,39 @@ questions by editing this file.
 
 ##### Stop the server by pressing Ctrl-C in the terminal, type "grunt test" to run tests. Where are the tests located?
 > The tests are located in two places, clientJavascript.spec.js and main.controller.spec.js with a total of 8 tests
+
 ## Part #2: modifying the project.
 
 - Set up Travis CI and add the build status icon to your project's README.
   - This should have been done as part of the setup.
 
-- Currently clicking on "kittens" returns the "page under construction" message. Using the view about.html as a sample, add a page that has a navigation bar. Add an image of your choice to the page (be aware of copyright rules) and a div that describes the image. 
-- Explore bootstrap by changing formatting of the page (for instance, position of the image and text). It doesn't have to look "nice", just different from what it currently is. 
+>Passing build can be found [here](https://travis-ci.org/perfettiful/3601-S16-lab3_angular)
+
+- Currently clicking on "kittens" returns the "page under construction" message. Using the view about.html as a sample,
+  add a page that has a navigation bar. Add an image of your choice to the page (be aware of copyright rules) and a div
+  that describes the image.
+
+- Explore bootstrap by changing formatting of the page (for instance, position of the image and text). It doesn't have
+to look "nice", just different from what it currently is.
 
 ## Part #3: components, controllers, and modules, oh my!
 
 >Protip: You can blame Jacob for the cheesy part name.
 
-- Your first task here is to create a new Angular module that acts as a container for Angular component controllers. To do this, look at javascript/app.js. Similar to `stdControllers`, create a module named `stdComponents`, and inject that into the `mainApp` module.
-- Now that we have an Angular module for containing Angular controllers of components, we want to add the controller for our Angular component to the new module. As such, go to `navbar.controller.js` and change the module it is a part of to the new `stdComponents` module.
-- Boom! You're done making your own module. To make sure Angular is still working, serve the application (using Grunt), and make sure you can still use the navbar on the index.html and about.html pages.
+- Your first task here is to create a new Angular module that acts as a container for Angular component controllers. To
+ do this, look at javascript/app.js. Similar to `stdControllers`, create a module named `stdComponents`, and inject that
+  into the `mainApp` module.
 
-- Now, we are going to go a bit more in depth into this. Using navbar as an example, we want you to make another component. This component will be a `footer` that you will add to your index.html and about.html pages.
+- Now that we have an Angular module for containing Angular controllers of components, we want to add the controller for
+ our Angular component to the new module. As such, go to `navbar.controller.js` and change the module it is a part of to
+  the new `stdComponents` module.
+
+- Boom! You're done making your own module. To make sure Angular is still working, serve the application (using Grunt),
+ and make sure you can still use the navbar on the index.html and about.html pages.
+
+- Now, we are going to go a bit more in depth into this. Using navbar as an example, we want you to make another
+component. This component will be a `footer` that you will add to your index.html and about.html pages.
+
 - To do this, you need to create: `footer.controller.js`, `footer.html`.
 
 >Protip: Make sure these are added to Git before you commit!
@@ -87,22 +103,39 @@ questions by editing this file.
 - You need to modify: `index.html`, `about.html`.
 - Some general advice:
   - Add the footer controller to the newly created `stdComponents` Angular module.
-  - Make sure to include the javascript for the Angular controller in the web pages the components will be a part of. DO NOT put the script tag to include this into `footer.html`.
+  - Make sure to include the javascript for the Angular controller in the web pages the components will be a part of.
+   DO NOT put the script tag to include this into `footer.html`.
+
   - Put the footer at the bottom of the pages. Please.
-  - If you get confused, look at the respective files that navbar uses. You should be able to mirror this _very_ closely after those files.
+
+  - If you get confused, look at the respective files that navbar uses. You should be able to mirror this _very_ closely
+   after those files.
   - We don't really care what the content of your footer is. It should definitely consist of a footer element.
 
->Protip: From w3schools... A footer element typically contains: authorship information, copyright information, contact information, sitemap, back to top links, related documents.
+>Protip: From w3schools... A footer element typically contains: authorship information, copyright information, contact
+information, sitemap, back to top links, related documents.
 
 
 ## Part #4: adding the GPA calculator, redux.
-- Your goal is to add a page with a form that allows a student to add their courses (course name, number of credits, and letter grade) and displays their GPA. The GPA changes as courses are added or removed. As before, letter grades are A, B, C, D, and F only. 
-- The controller for the GPA needs to be added to main.controller.js. Think of what needs to be in its scope. 
-- Add the necessary view, include the navbar into it, and then add the GPA calculator. Add one feature at a time, make sure everything is working as it should. 
-- As before, use TDD for all the helper functions (you may reuse the tests from the previous lab). Now they will all be located in public (client-side). No need to modify karma files since it's already testing client-side javascript. 
-- Use different color for displaying the GPA, depending on whether it is below 2.0, between 2.0 and 3.0, and 3.0 and above. Use your own CSS or bootstrap. 
-- Perform simple data validation (add the corresponding function to the controller) so that invalid entries (invalid grades or wrong number of credits) are not added to the model. An error message needs to be displayed to the user). 
+- Your goal is to add a page with a form that allows a student to add their courses (course name, number of credits, and
+ letter grade) and displays their GPA. The GPA changes as courses are added or removed. As before, letter grades are A,
+  B, C, D, and F only.
 
-##### When you're done with the lab, take a look at your test coverage report and make a note here about what pieces of code are covered well, what isn't, and why this is the case.
+- The controller for the GPA needs to be added to main.controller.js. Think of what needs to be in its scope.
+
+- Add the necessary view, include the navbar into it, and then add the GPA calculator. Add one feature at a time, make
+sure everything is working as it should.
+
+- As before, use TDD for all the helper functions (you may reuse the tests from the previous lab). Now they will all be
+ located in public (client-side). No need to modify karma files since it's already testing client-side javascript.
+
+- Use different color for displaying the GPA, depending on whether it is below 2.0, between 2.0 and 3.0, and 3.0 and
+above. Use your own CSS or bootstrap.
+- Perform simple data validation (add the corresponding function to the controller) so that invalid entries (invalid
+grades or wrong number of credits) are not added to the model. An error message needs to be displayed to the user).
+
+
+##### When you're done with the lab, take a look at your test coverage report and make a note here about what pieces of
+ code are covered well, what isn't, and why this is the case.
 
 
