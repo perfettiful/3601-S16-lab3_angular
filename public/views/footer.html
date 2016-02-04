@@ -1,0 +1,5 @@
+<div id="footer" ng-controller="footerCtrl as footer">
+    <ul class="nav nav-pills">
+        <li role="presentation" ng-repeat="item in footer.pages track by $index"><a href="{{item.link}}">{{item.text}}</a></li>
+    </ul>
+</div>

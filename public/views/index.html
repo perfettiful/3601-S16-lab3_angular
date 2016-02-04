@@ -17,6 +17,7 @@
     <script type="text/javascript" src="javascript/app.js"></script>
     <script type="text/javascript" src="javascript/main.controller.js"></script>
     <script type="text/javascript" src="javascript/navbar.controller.js"></script>
+    <script type="text/javascript" src="javascript/footer.controller.js"></script>
 </head>
 
 <body ng-app="mainApp" ng-controller="mainCtrl as mainControl">
@@ -41,5 +42,6 @@
             <li class="list-group-item" ng-repeat="test in mainControl.data">{{test.text}}<span class="glyphicon glyphicon-remove-sign floatRight" style="color: red" ng-click="mainControl.removeData($index)"></span></li>
         </ul>
     </div>
+    <div ng-include="'views/footer.html'"></div>
 </body>
 </html>
