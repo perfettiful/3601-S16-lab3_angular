@@ -33,13 +33,43 @@
         <li class="list-group-item">
 
             <form ng-submit="mainControl.addData()">
-                <input ng-model="mainControl.textField" type="text" size="100" placeholder="Add a new item to the list!!!!!">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a><4.00>A</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                            <input type="select" class="form-control" aria-label="...">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-lg-3">
+                        <div class="input-group">
+                            <input type="select" class="form-control" aria-label="...">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+
                 <input type="submit" value="submit" class="btn btn-success">
                 <span class="badge floatRight">Total Items: {{mainControl.itemsInList()}}</span>
             </form>
 
         </li>
-        <li class="list-group-item" ng-repeat="test in mainControl.data">{{test.text}}<span class="glyphicon glyphicon-remove-sign floatRight" style="color: red" ng-click="mainControl.removeData($index)"></span></li>
+        <li class="list-group-item" ng-repeat="test in mainControl.gpadata">{{test.text}}<span class="glyphicon glyphicon-remove-sign floatRight" style="color: red" ng-click="mainControl.removeData($index)"></span></li>
     </ul>
 </div>
 

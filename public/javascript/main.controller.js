@@ -16,6 +16,10 @@
 
         ];
 
+        mainControl.gpadata= [
+
+            ];
+
         mainControl.addData = function(){
             if(mainControl.textField.length >= 1) {
                 mainControl.data.push({text: mainControl.textField});
@@ -34,4 +38,24 @@
         mainControl.itemsInList = function(){
             return mainControl.data.length;
         };
+
+        mainControl.totalCredits = function(crd1, crd2, crd3){
+            return crd1 + crd2 + crd3;
+        }
+
+        mainControl.grdPts = function(grd1, grd2, grd3){
+
+
+            var totalPts = grdPts1 + grdPts2 + grdPts3;
+            return totalPts;
+        }
+
+        mainControl.gpa = function(){
+
+        }
+
+        mainControl.classesInList = function(){
+            return mainControl.gpadata.length;
+        };
+
     });
