@@ -45,6 +45,256 @@ describe('Testing controller: navbarCtrl', function(){
 
     // load the controller's module
     beforeEach(module('mainApp'));
+    it("should be able to remove an item from the list", function(){
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        var initialLength = scope.mainControl.gpaqdata.length;
+        scope.mainControl.removeData(0);
+        expect(scope.mainControl.data.length < initialLength).toEqual(true);
+    });
+
+    it("should be able to add an item to the list", function(){
+        var initialLength = scope.mainControl.gpadata.length;
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "1";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length > initialLength).toEqual(true);
+    });
+
+    it("should ignore improper cases when adding data", function(){
+        // First, set up proper input data.
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "1";
+
+        expect(scope.mainControl.gpadata.length).toBe(0);
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(1);
+
+        // Test without course field. Should add anyhow.
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "1";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(2);
+
+        // Test without grade field. Should not add anything.
+        scope.mainControl.gradeField = "";
+        scope.mainControl.creditsField = "1";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(2);
+
+        // Test without credits field. Should not add anything.
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(2);
+    });
+
+    it("Should be able to get the length of the list", function(){
+        var initialLength = scope.mainControl.classesInList();
+        expect(initialLength).toBe(0);
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        expect(scope.mainControl.classesInList()).not.toBe(initialLength);
+        expect(scope.mainControl.classesInList()).toBe(1);
+        scope.mainControl.removeData(0);
+        expect(scope.mainControl.classesInList()).toBe(0);
+    });
+
+    it("Testing letter to number conversions", function(){
+        expect(scope.mainControl.letterToNum("A")).toBe(4.00);
+        expect(scope.mainControl.letterToNum("A-")).toBe(3.66);
+        expect(scope.mainControl.letterToNum("B+")).toBe(3.33);
+        expect(scope.mainControl.letterToNum("B")).toBe(3.00);
+        expect(scope.mainControl.letterToNum("B-")).toBe(2.66);
+        expect(scope.mainControl.letterToNum("C+")).toBe(2.33);
+        expect(scope.mainControl.letterToNum("C")).toBe(2.00);
+        expect(scope.mainControl.letterToNum("C-")).toBe(1.66);
+        expect(scope.mainControl.letterToNum("D+")).toBe(1.33);
+        expect(scope.mainControl.letterToNum("D")).toBe(1.00);
+        expect(scope.mainControl.letterToNum("D-")).toBe(0.66);
+        expect(scope.mainControl.letterToNum("F")).toBe(0);
+        expect(scope.mainControl.letterToNum("Q")).toBe(-1);
+    });
+
+    it("Should be able to calculate GPA properly", function(){
+        expect(scope.mainControl.gpa()).toBe("");
+
+        // Test letter grades for proper functionality.
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('4.00');
+
+        scope.mainControl.gpadata.push({grade: "B", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.50');
+
+        scope.mainControl.gpadata.push({grade: "C", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.00');
+
+        scope.mainControl.gpadata.push({grade: "D", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('2.50');
+
+        scope.mainControl.gpadata.push({grade: "F", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('2.00');
+
+
+        // Reset data. Removes all the courses.
+        scope.mainControl.gpadata = [];
+
+
+        // Testing on +/- grades, and number of credits.
+        scope.mainControl.gpadata.push({grade: "A-", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.66');
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "B+", credits: "2"});
+        expect(scope.mainControl.gpa()).toBe('3.33')
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "B-", credits: "3"});
+        expect(scope.mainControl.gpa()).toBe('2.66');
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "C+", credits: "4"});
+        expect(scope.mainControl.gpa()).toBe('2.33')
+        scope.mainControl.removeData(0);
+    it("should be able to remove an item from the list", function(){
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        var initialLength = scope.mainControl.gpaqdata.length;
+        scope.mainControl.removeData(0);
+        expect(scope.mainControl.data.length < initialLength).toEqual(true);
+    });
+
+    it("should be able to add an item to the list", function(){
+        var initialLength = scope.mainControl.gpadata.length;
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "1";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length > initialLength).toEqual(true);
+    });
+
+    it("should ignore improper cases when adding data", function(){
+        // First, set up proper input data.
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "1";
+
+        expect(scope.mainControl.gpadata.length).toBe(0);
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(1);
+
+        // Test without course field. Should add anyhow.
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "1";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(2);
+
+        // Test without grade field. Should not add anything.
+        scope.mainControl.gradeField = "";
+        scope.mainControl.creditsField = "1";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(2);
+
+        // Test without credits field. Should not add anything.
+        scope.mainControl.gradeField = "A";
+        scope.mainControl.creditsField = "";
+        scope.mainControl.addData();
+        expect(scope.mainControl.gpadata.length).toBe(2);
+    });
+
+    it("Should be able to get the length of the list", function(){
+        var initialLength = scope.mainControl.classesInList();
+        expect(initialLength).toBe(0);
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        expect(scope.mainControl.classesInList()).not.toBe(initialLength);
+        expect(scope.mainControl.classesInList()).toBe(1);
+        scope.mainControl.removeData(0);
+        expect(scope.mainControl.classesInList()).toBe(0);
+    });
+
+    it("Testing letter to number conversions", function(){
+        expect(scope.mainControl.letterToNum("A")).toBe(4.00);
+        expect(scope.mainControl.letterToNum("A-")).toBe(3.66);
+        expect(scope.mainControl.letterToNum("B+")).toBe(3.33);
+        expect(scope.mainControl.letterToNum("B")).toBe(3.00);
+        expect(scope.mainControl.letterToNum("B-")).toBe(2.66);
+        expect(scope.mainControl.letterToNum("C+")).toBe(2.33);
+        expect(scope.mainControl.letterToNum("C")).toBe(2.00);
+        expect(scope.mainControl.letterToNum("C-")).toBe(1.66);
+        expect(scope.mainControl.letterToNum("D+")).toBe(1.33);
+        expect(scope.mainControl.letterToNum("D")).toBe(1.00);
+        expect(scope.mainControl.letterToNum("D-")).toBe(0.66);
+        expect(scope.mainControl.letterToNum("F")).toBe(0);
+        expect(scope.mainControl.letterToNum("Q")).toBe(-1);
+    });
+
+    it("Should be able to calculate GPA properly", function(){
+        expect(scope.mainControl.gpa()).toBe("");
+
+        // Test letter grades for proper functionality.
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('4.00');
+
+        scope.mainControl.gpadata.push({grade: "B", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.50');
+
+        scope.mainControl.gpadata.push({grade: "C", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.00');
+
+        scope.mainControl.gpadata.push({grade: "D", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('2.50');
+
+        scope.mainControl.gpadata.push({grade: "F", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('2.00');
+
+
+        // Reset data. Removes all the courses.
+        scope.mainControl.gpadata = [];
+
+
+        // Testing on +/- grades, and number of credits.
+        scope.mainControl.gpadata.push({grade: "A-", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.66');
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "B+", credits: "2"});
+        expect(scope.mainControl.gpa()).toBe('3.33')
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "B-", credits: "3"});
+        expect(scope.mainControl.gpa()).toBe('2.66');
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "C+", credits: "4"});
+        expect(scope.mainControl.gpa()).toBe('2.33')
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "C-", credits: "5"});
+        expect(scope.mainControl.gpa()).toBe('1.66');
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "D+", credits: "6"});
+        expect(scope.mainControl.gpa()).toBe('1.33')
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "D-", credits: "7"});
+        expect(scope.mainControl.gpa()).toBe('0.66');
+        scope.mainControl.removeData(0);
+
+
+    })
+
+
+        scope.mainControl.gpadata.push({grade: "C-", credits: "5"});
+        expect(scope.mainControl.gpa()).toBe('1.66');
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "D+", credits: "6"});
+        expect(scope.mainControl.gpa()).toBe('1.33')
+        scope.mainControl.removeData(0);
+
+        scope.mainControl.gpadata.push({grade: "D-", credits: "7"});
+        expect(scope.mainControl.gpa()).toBe('0.66');
+        scope.mainControl.removeData(0);
+
+
+    })
+
 
     var mainCtrl, scope;
 
@@ -65,6 +315,7 @@ describe('Testing controller: navbarCtrl', function(){
     });
 });
 
+//==============Tests for Footer===================
 describe('Testing controller: footerCtrl', function(){
 
     // load the controller's module
@@ -89,137 +340,133 @@ describe('Testing controller: footerCtrl', function(){
     });
 });
 
+//===================Tests Gpa Clac====================
 
 describe("Testing Main Controller functionality: ", function(){
 
     it("should be able to remove an item from the list", function(){
-        scope.mainControl.data.push({course: "test", grade: "A", credits: "1"});
-        var initialLength = scope.mainControl.data.length;
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        var initialLength = scope.mainControl.gpaqdata.length;
         scope.mainControl.removeData(0);
         expect(scope.mainControl.data.length < initialLength).toEqual(true);
     });
 
     it("should be able to add an item to the list", function(){
-        var initialLength = scope.mainControl.data.length;
+        var initialLength = scope.mainControl.gpadata.length;
         scope.mainControl.gradeField = "A";
-        scope.mainControl.creditsField = "1"
+        scope.mainControl.creditsField = "1";
         scope.mainControl.addData();
-        expect(scope.mainControl.data.length > initialLength).toEqual(true);
+        expect(scope.mainControl.gpadata.length > initialLength).toEqual(true);
     });
 
     it("should ignore improper cases when adding data", function(){
         // First, set up proper input data.
-        scope.mainControl.courseField = "Math";
         scope.mainControl.gradeField = "A";
         scope.mainControl.creditsField = "1";
 
-        expect(scope.mainControl.data.length).toBe(0);
+        expect(scope.mainControl.gpadata.length).toBe(0);
         scope.mainControl.addData();
-        expect(scope.mainControl.data.length).toBe(1);
+        expect(scope.mainControl.gpadata.length).toBe(1);
 
         // Test without course field. Should add anyhow.
-        scope.mainControl.courseField = "";
         scope.mainControl.gradeField = "A";
         scope.mainControl.creditsField = "1";
         scope.mainControl.addData();
-        expect(scope.mainControl.data.length).toBe(2);
+        expect(scope.mainControl.gpadata.length).toBe(2);
 
         // Test without grade field. Should not add anything.
-        scope.mainControl.courseField = "Class";
         scope.mainControl.gradeField = "";
         scope.mainControl.creditsField = "1";
         scope.mainControl.addData();
-        expect(scope.mainControl.data.length).toBe(2);
+        expect(scope.mainControl.gpadata.length).toBe(2);
 
         // Test without credits field. Should not add anything.
-        scope.mainControl.courseField = "Course";
         scope.mainControl.gradeField = "A";
         scope.mainControl.creditsField = "";
         scope.mainControl.addData();
-        expect(scope.mainControl.data.length).toBe(2);
+        expect(scope.mainControl.gpadata.length).toBe(2);
     });
 
     it("Should be able to get the length of the list", function(){
-        var initialLength = scope.mainControl.itemsInList();
+        var initialLength = scope.mainControl.classesInList();
         expect(initialLength).toBe(0);
-        scope.mainControl.data.push({course: "test", grade: "A", credits: "1"});
-        expect(scope.mainControl.itemsInList()).not.toBe(initialLength);
-        expect(scope.mainControl.itemsInList()).toBe(1);
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        expect(scope.mainControl.classesInList()).not.toBe(initialLength);
+        expect(scope.mainControl.classesInList()).toBe(1);
         scope.mainControl.removeData(0);
-        expect(scope.mainControl.itemsInList()).toBe(0);
+        expect(scope.mainControl.classesInList()).toBe(0);
     });
 
     it("Testing letter to number conversions", function(){
-        expect(scope.mainControl.letToNum("A")).toBe(4.00);
-        expect(scope.mainControl.letToNum("A-")).toBe(3.66);
-        expect(scope.mainControl.letToNum("B+")).toBe(3.33);
-        expect(scope.mainControl.letToNum("B")).toBe(3.00);
-        expect(scope.mainControl.letToNum("B-")).toBe(2.66);
-        expect(scope.mainControl.letToNum("C+")).toBe(2.33);
-        expect(scope.mainControl.letToNum("C")).toBe(2.00);
-        expect(scope.mainControl.letToNum("C-")).toBe(1.66);
-        expect(scope.mainControl.letToNum("D+")).toBe(1.33);
-        expect(scope.mainControl.letToNum("D")).toBe(1.00);
-        expect(scope.mainControl.letToNum("D-")).toBe(0.66);
-        expect(scope.mainControl.letToNum("F")).toBe(0);
-        expect(scope.mainControl.letToNum("sdf")).toBe(-1); // Can't be bothered to write a custom error, and this will work fine with the GPA Calculator function anywhow.
+        expect(scope.mainControl.letterToNum("A")).toBe(4.00);
+        expect(scope.mainControl.letterToNum("A-")).toBe(3.66);
+        expect(scope.mainControl.letterToNum("B+")).toBe(3.33);
+        expect(scope.mainControl.letterToNum("B")).toBe(3.00);
+        expect(scope.mainControl.letterToNum("B-")).toBe(2.66);
+        expect(scope.mainControl.letterToNum("C+")).toBe(2.33);
+        expect(scope.mainControl.letterToNum("C")).toBe(2.00);
+        expect(scope.mainControl.letterToNum("C-")).toBe(1.66);
+        expect(scope.mainControl.letterToNum("D+")).toBe(1.33);
+        expect(scope.mainControl.letterToNum("D")).toBe(1.00);
+        expect(scope.mainControl.letterToNum("D-")).toBe(0.66);
+        expect(scope.mainControl.letterToNum("F")).toBe(0);
+        expect(scope.mainControl.letterToNum("Q")).toBe(-1);
     });
 
     it("Should be able to calculate GPA properly", function(){
-        expect(scope.mainControl.getGPA()).toBe("");
+        expect(scope.mainControl.gpa()).toBe("");
 
         // Test letter grades for proper functionality.
-        scope.mainControl.data.push({course: "test", grade: "A", credits: "1"});
-        expect(scope.mainControl.getGPA()).toBe('4.00');
+        scope.mainControl.gpadata.push({grade: "A", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('4.00');
 
-        scope.mainControl.data.push({course: "test", grade: "B", credits: "1"});
-        expect(scope.mainControl.getGPA()).toBe('3.50');
+        scope.mainControl.gpadata.push({grade: "B", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.50');
 
-        scope.mainControl.data.push({course: "test", grade: "C", credits: "1"});
-        expect(scope.mainControl.getGPA()).toBe('3.00');
+        scope.mainControl.gpadata.push({grade: "C", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.00');
 
-        scope.mainControl.data.push({course: "test", grade: "D", credits: "1"});
-        expect(scope.mainControl.getGPA()).toBe('2.50');
+        scope.mainControl.gpadata.push({grade: "D", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('2.50');
 
-        scope.mainControl.data.push({course: "test", grade: "F", credits: "1"});
-        expect(scope.mainControl.getGPA()).toBe('2.00');
+        scope.mainControl.gpadata.push({grade: "F", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('2.00');
 
 
         // Reset data. Removes all the courses.
-        scope.mainControl.data = [];
+        scope.mainControl.gpadata = [];
 
 
         // Testing on +/- grades, and number of credits.
-        scope.mainControl.data.push({course: "test", grade: "A-", credits: "1"});
-        expect(scope.mainControl.getGPA()).toBe('3.66');
+        scope.mainControl.gpadata.push({grade: "A-", credits: "1"});
+        expect(scope.mainControl.gpa()).toBe('3.66');
         scope.mainControl.removeData(0);
 
-        scope.mainControl.data.push({course: "test", grade: "B+", credits: "2"});
-        expect(scope.mainControl.getGPA()).toBe('3.33')
+        scope.mainControl.gpadata.push({grade: "B+", credits: "2"});
+        expect(scope.mainControl.gpa()).toBe('3.33')
         scope.mainControl.removeData(0);
 
-        scope.mainControl.data.push({course: "test", grade: "B-", credits: "3"});
-        expect(scope.mainControl.getGPA()).toBe('2.66');
+        scope.mainControl.gpadata.push({grade: "B-", credits: "3"});
+        expect(scope.mainControl.gpa()).toBe('2.66');
         scope.mainControl.removeData(0);
 
-        scope.mainControl.data.push({course: "test", grade: "C+", credits: "4"});
-        expect(scope.mainControl.getGPA()).toBe('2.33')
+        scope.mainControl.gpadata.push({grade: "C+", credits: "4"});
+        expect(scope.mainControl.gpa()).toBe('2.33')
         scope.mainControl.removeData(0);
 
-        scope.mainControl.data.push({course: "test", grade: "C-", credits: "5"});
-        expect(scope.mainControl.getGPA()).toBe('1.66');
+        scope.mainControl.gpadata.push({grade: "C-", credits: "5"});
+        expect(scope.mainControl.gpa()).toBe('1.66');
         scope.mainControl.removeData(0);
 
-        scope.mainControl.data.push({course: "test", grade: "D+", credits: "6"});
-        expect(scope.mainControl.getGPA()).toBe('1.33')
+        scope.mainControl.gpadata.push({grade: "D+", credits: "6"});
+        expect(scope.mainControl.gpa()).toBe('1.33')
         scope.mainControl.removeData(0);
 
-        scope.mainControl.data.push({course: "test", grade: "D-", credits: "7"});
-        expect(scope.mainControl.getGPA()).toBe('0.66');
+        scope.mainControl.gpadata.push({grade: "D-", credits: "7"});
+        expect(scope.mainControl.gpa()).toBe('0.66');
         scope.mainControl.removeData(0);
 
 
     })
 
-});
 });

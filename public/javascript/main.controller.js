@@ -24,11 +24,13 @@
             ];
 
         mainControl.gpaAdd = function(){
-            if( mainControl.letterToNum(mainControl.gradeField)>-1 && !isNaN(parseInt(mainControl.creditField))) {
-                //console.log("Valid!");
+            if(mainControl.letterToNum(mainControl.gradeField) > -1 && !isNaN(parseInt(mainControl.creditField))) {
+                console.log("Valid!");
                 mainControl.gpadata.push({grade: mainControl.gradeField, credits: mainControl.creditField});
                 mainControl.gradeField  = "";
                 mainControl.creditField  = "";
+            }else{
+                window.alert("Invalid letter grade or number of credits!");
             }
         };
 
@@ -48,18 +50,20 @@
                 return 2.333;
             }else if(grd == "C"){
                 return 2.00;
-            }else if(grd == "C-" || "S"){
+            }else if(grd == "C-"){
                 return 1.667;
             }else if(grd == "D+"){
                 return 1.333;
             }else if(grd == "D"){
                 return 1.00;
-            }else if(grd == "F" || "N"){
+            }else if(grd == "F"){
                 return 0.00;
+            }else {
+                return -1;
             }
-            else return -1;
+            console.log(grd);
 
-        }
+        };
 
         mainControl.addData = function(){
             if(mainControl.textField.length >= 1) {
@@ -97,19 +101,34 @@
             return total;
         }
 
-        mainControl.grdPts = function(grd1, grd2, grd3){
-
-
-            var totalPts = grdPts1 + grdPts2 + grdPts3;
-            return totalPts;
-        }
 
         mainControl.gpa = function(){
+            var totalCreds = mainControl.totalCredits();
+            var grdPts = 0;
 
+            var end = mainControl.gpadata.length;
+            for(var i = 0; i < end; i++ ) {
+                grdPts += parseInt(mainControl.letterToNum((mainControl.gpadata[i].grade))*(mainControl.gpadata[i].credits));
+            }
+
+
+            var gpa = (grdPts/totalCreds).toFixed(2);
+            console.log(gpa);
+            return gpa;
         }
 
         mainControl.classesInList = function(){
             return mainControl.gpadata.length;
         };
+
+        mainControl.applyClass = function(){
+            var change = document.getElementById('GPA');
+            var gpa = mainControl.gpa();
+            if(gpa < 2.0) {
+                change.className = 'alert alert-warning';
+            }
+        }
+
+
 
     });

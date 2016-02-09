@@ -35,7 +35,7 @@
             <form ng-submit="mainControl.gpaAdd()">
                 <input ng-model="mainControl.gradeField" type="text" size="50" placeholder="Add a new class grade!">
                 <input ng-model="mainControl.creditField" type="text" size="50" placeholder="Add a number of credits!">
-                <input type="submit" value="submit" class="btn btn-success">
+                <input type="submit" value="submit" class="btn btn-success" onclick=mainControl.applyClass()>
                 <span class="badge floatRight">Total Credits: {{mainControl.totalCredits()}}</span>
             </form>
 
@@ -44,6 +44,9 @@
     </ul>
 </div>
 
+
+
+<div class="alert alert-success" role="alert" id = "GPA" >GPA is {{mainControl.gpa()}}</div>
 
 <img src="assets/images/calc.png">
 <div ng-include="'views/footer.html'"></div>
